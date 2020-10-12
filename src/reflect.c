@@ -18,8 +18,8 @@
 
 /*!
  * @brief Compute the reflection of a set of data bits around its center.
- * @param[in] data  The data bits to be reflected.
- * @param[in] num2  The number of bits.
+ * @param[in] data    The data bits to be reflected.
+ * @param[in] n_bits  The number of bits.
  * @return The reflected data.
  */
 uint32_t
