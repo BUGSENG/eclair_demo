@@ -13,7 +13,7 @@
 -public_files+=api:public
 -config=MC3R1.R8.7,+declarations={hide,"^reflect\\(.*$"}
 
-#-config=MC3R1.R15.5,reports+={hide,"all_area(context(^main\\(.*$))"}
+-config=MC3R1.R15.5,reports+={hide,"all_area(context(^main\\(.*$))"}
 
 #-config=MC3R1.R21.6,reports+={hide,"all_area(all_loc(^src/main\\.c$))"}
 
