@@ -40,20 +40,28 @@ main (int argc, char *argv[])
      */
     if (1 == argc)
     {
+        /* -E> hide MC3R1.D4.7 2 If printing to stderr fails there is little we can do besides returning 1. */
         fprintf(stderr, "usage: %s -l [string]...\n", my_name);
         fprintf(stderr, "usage: %s string...\n", my_name);
         return(1);
     }
 
 
+    int32_t r;
+
     /*
      * Print table labels, -l, if specified.
      */
     if (('-' == argv[1][0]) && ('l' == argv[1][1]))
     {
-        printf(PRINTF_FORMAT, "CRC", "Slow", "Fast", "Test String");
-        printf(PRINTF_FORMAT, "---", "----", "----", "-----------");
-        arg_cnt = 2; // Skip past option
+        r = printf(PRINTF_FORMAT, "CRC", "Slow", "Fast", "Test String");
+        if (r < 0) {
+        	return(1);
+        }
+        r = printf(PRINTF_FORMAT, "---", "----", "----", "-----------");
+        if (r < 0) {
+        	return(1);
+        }        arg_cnt = 2; // Skip past option
     }
 
     /*
@@ -70,19 +78,27 @@ main (int argc, char *argv[])
 
         // Slow CRC Computation
                                         // Casting is the same size, 1 byte
-        sprintf(cslow, HEX_FORMAT,
-            crc_slow((uint8_t const *) argv[arg_cnt], parm_len));
+        r = sprintf(cslow, HEX_FORMAT,
+        		crc_slow((uint8_t const *) argv[arg_cnt], parm_len));
+        if (r < 0) {
+        	return(1);
+        }
 
         // Fast CRC Computation
                                         // Casting is the same size, 1 byte
-        sprintf(cfast, HEX_FORMAT,
-            crc_fast((uint8_t const *) argv[arg_cnt], parm_len));
+        r = sprintf(cfast, HEX_FORMAT,
+        		crc_fast((uint8_t const *) argv[arg_cnt], parm_len));
+        if (r < 0) {
+        	return(1);
+        }
 
         /*
          * Print the results.
          */
-        printf(PRINTF_FORMAT, CRC_NAME, cslow, cfast, argv[arg_cnt]);
-
+        r = printf(PRINTF_FORMAT, CRC_NAME, cslow, cfast, argv[arg_cnt]);
+        if (r < 0) {
+        	return(1);
+        }
     }
 
 return (0);
