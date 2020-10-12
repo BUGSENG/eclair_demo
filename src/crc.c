@@ -20,7 +20,7 @@
 // Algorithmic parameters based on CRC elections made in crc.h.
 //
 #define BITS_PER_BYTE      8
-#define WIDTH              (BITS_PER_BYTE * sizeof(crc_t))
+#define WIDTH              (BITS_PER_BYTE * (uint8_t) sizeof(crc_t))
 #define TOPBIT             ((crc_t) 1 << (WIDTH - 1))
 
 // Allocate storage for the byte-wide CRC lookup table.
@@ -157,7 +157,7 @@ crc_fast (uint8_t const * const p_message, size_t n_bytes)
     for (size_t byte = 0; byte < n_bytes; ++byte)
     {
         uint8_t data = REFLECT_DATA(p_message[byte]) ^
-                           (remainder >> (WIDTH - BITS_PER_BYTE));
+                           (uint8_t) (remainder >> (WIDTH - BITS_PER_BYTE));
         remainder = g_crc_table[data] ^ (remainder << BITS_PER_BYTE);
     }
 
