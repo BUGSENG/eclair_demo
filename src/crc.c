@@ -21,7 +21,7 @@
 //
 #define BITS_PER_BYTE      8
 #define WIDTH              (BITS_PER_BYTE * sizeof(crc_t))
-#define TOPBIT             (1 << (WIDTH - 1))
+#define TOPBIT             ((crc_t) 1 << (WIDTH - 1))
 
 // Allocate storage for the byte-wide CRC lookup table.
 //
