@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <stddef.h>
 
 #include "crc.h"
 
@@ -65,7 +66,7 @@ main (int argc, char *argv[])
      */
     for (; arg_cnt < argc; arg_cnt++)
     {
-        int parm_len = strlen(argv[arg_cnt]);
+        size_t parm_len = strlen(argv[arg_cnt]);
 
         // Slow CRC Computation
                                         // Casting is the same size, 1 byte
