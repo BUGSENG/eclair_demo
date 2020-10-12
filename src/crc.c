@@ -14,7 +14,7 @@
 
 #include "crc.h"
 #include "reflect.h"
-
+#include "MISRA_C_2012_doc.h"
 
 // Algorithmic parameters based on CRC elections made in crc.h.
 //
