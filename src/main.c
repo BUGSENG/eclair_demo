@@ -33,7 +33,7 @@ main (int argc, char *argv[])
     char           cslow[20];
     char           cfast[20];
     const char *   my_name = argv[0];
-    uint8_t  arg_cnt = 1;
+    int8_t  arg_cnt = 1;
 
     /*
      * Must have at least 1 parameter (argc must be greater than 1).
