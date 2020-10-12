@@ -36,9 +36,9 @@ reflect (uint32_t data, uint8_t n_bits)
     {
         // If the LSB bit is set, set the reflection of it.
         //
-        if (data & 0x01)
+        if (data & 0x01U)
         {
-            reflection |= (1 << ((n_bits - 1) - bit));
+            reflection |= ((uint32_t) 1 << ((n_bits - 1U) - bit));
         }
 
         data = (data >> 1);
