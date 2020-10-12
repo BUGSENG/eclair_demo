@@ -73,7 +73,7 @@ crc_init (void)
     {
         // Start with the dividend followed by zeros.
         //
-        crc_t remainder = dividend << (WIDTH - BITS_PER_BYTE);
+        crc_t residue = dividend << (WIDTH - BITS_PER_BYTE);
 
         // Perform modulo-2 division, a bit at a time.
         //
@@ -81,19 +81,19 @@ crc_init (void)
         {
             // Try to divide the current data bit.
             //
-            if ((remainder & TOPBIT) != 0U)
+            if ((residue & TOPBIT) != 0U)
             {
-                remainder = (remainder << 1) ^ POLYNOMIAL;
+                residue = (residue << 1) ^ POLYNOMIAL;
             }
             else
             {
-                remainder = (remainder << 1);
+                residue = (residue << 1);
             }
         }
 
         // Store the result into the table.
         //
-        g_crc_table[dividend] = remainder;
+        g_crc_table[dividend] = residue;
     }
 
 }   /* crc_init() */
@@ -108,7 +108,7 @@ crc_init (void)
 crc_t
 crc_slow (uint8_t const * const p_message, size_t n_bytes)
 {
-    crc_t    remainder = INITIAL_REMAINDER;
+    crc_t    residue = INITIAL_REMAINDER;
 
     // Perform modulo-2 division, one byte at a time.
     //
@@ -116,7 +116,7 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
     {
         // Bring the next byte into the remainder.
         //
-        remainder ^= ((crc_t) REFLECT_DATA(p_message[byte]) << (WIDTH - BITS_PER_BYTE));
+        residue ^= ((crc_t) REFLECT_DATA(p_message[byte]) << (WIDTH - BITS_PER_BYTE));
 
         // Perform modulo-2 division, one bit at a time.
         //
@@ -124,20 +124,20 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
         {
             // Try to divide the current data bit.
             //
-            if ((remainder & TOPBIT) != 0U)
+            if ((residue & TOPBIT) != 0U)
             {
-                remainder = (remainder << 1) ^ POLYNOMIAL;
+                residue = (residue << 1) ^ POLYNOMIAL;
             }
             else
             {
-                remainder = (remainder << 1);
+                residue = (residue << 1);
             }
         }
     }
 
     // The final remainder is the CRC result.
     //
-    return (REFLECT_REMAINDER(remainder) ^ FINAL_XOR_VALUE);
+    return (REFLECT_REMAINDER(residue) ^ FINAL_XOR_VALUE);
 
 }   /* crc_slow() */
 
@@ -150,20 +150,20 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
 crc_t
 crc_fast (uint8_t const * const p_message, size_t n_bytes)
 {
-    crc_t remainder = INITIAL_REMAINDER;
+    crc_t residue = INITIAL_REMAINDER;
 
     // Divide the message by the polynomial, a byte at a time.
     //
     for (size_t byte = 0; byte < n_bytes; ++byte)
     {
         uint8_t data = REFLECT_DATA(p_message[byte]) ^
-                           (uint8_t) (remainder >> (WIDTH - BITS_PER_BYTE));
-        remainder = g_crc_table[data] ^ (remainder << BITS_PER_BYTE);
+                           (uint8_t) (residue >> (WIDTH - BITS_PER_BYTE));
+        residue = g_crc_table[data] ^ (residue << BITS_PER_BYTE);
     }
 
     // The final remainder is the CRC.
     //
-    return (REFLECT_REMAINDER(remainder) ^ FINAL_XOR_VALUE);
+    return (REFLECT_REMAINDER(residue) ^ FINAL_XOR_VALUE);
 }   /* crc_fast() */
 
 /*** end of file ***/
