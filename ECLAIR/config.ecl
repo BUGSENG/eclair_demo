@@ -9,9 +9,9 @@
 -config=MC3R1.D4.9,macros+={hide, ^REFLECT_REMAINDER$}
 -doc_end
 
-#-file_tag+={api:public,"^src/crc\\.h$"}
-#-public_files+=api:public
-#-config=MC3R1.R8.7,+declarations={hide,"^reflect\\(.*$"}
+-file_tag+={api:public,"^src/crc\\.h$"}
+-public_files+=api:public
+-config=MC3R1.R8.7,+declarations={hide,"^reflect\\(.*$"}
 
 #-config=MC3R1.R15.5,reports+={hide,"all_area(context(^main\\(.*$))"}
 
