@@ -30,9 +30,9 @@
 int
 main (int argc, char *argv[])
 {
-    char     cslow[20];
-    char     cfast[20];
-    char *   my_name = argv[0];
+    char           cslow[20];
+    char           cfast[20];
+    const char *   my_name = argv[0];
     uint8_t  arg_cnt = 1;
 
     /*
