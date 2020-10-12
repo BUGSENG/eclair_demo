@@ -42,8 +42,8 @@ typedef uint32_t    crc_t;
 // Public API functions provided by the Compact CRC library.
 //
 void    crc_init(void);
-crc_t   crc_slow(uint8_t const * const p_message, int n_bytes);
-crc_t   crc_fast(uint8_t const * const p_message, int n_bytes);
+crc_t   crc_slow(uint8_t const * const p_message, size_t n_bytes);
+crc_t   crc_fast(uint8_t const * const p_message, size_t n_bytes);
 
 
 #endif /* CRC_H */
