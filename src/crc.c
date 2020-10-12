@@ -50,8 +50,8 @@ static crc_t  g_crc_table[CRC_TABLE_SIZE];
 #elif defined(CRC_32)
 
 #define POLYNOMIAL              ((crc_t) 0x04C11DB7)
-#define INITIAL_REMAINDER       ((crc_t) 0xFFFFFFFF)
-#define FINAL_XOR_VALUE         ((crc_t) 0xFFFFFFFF)
+#define INITIAL_REMAINDER       ((crc_t) 0xFFFFFFFFU)
+#define FINAL_XOR_VALUE         ((crc_t) 0xFFFFFFFFU)
 #define REFLECT_DATA(X)         ((uint8_t) reflect((X), BITS_PER_BYTE))
 #define REFLECT_REMAINDER(X)    ((crc_t) reflect((X), WIDTH))
 
