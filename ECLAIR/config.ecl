@@ -4,8 +4,10 @@
 
 -eval_file=gcc-x86_64-7.5.0.ecl
 
-#-config=MC3R1.D4.9,macros+={hide, ^REFLECT_DATA$}
-#-config=MC3R1.D4.9,macros+={hide, ^REFLECT_REMAINDER$}
+-doc_begin="Prefer not to change the original code structure."
+-config=MC3R1.D4.9,macros+={hide, ^REFLECT_DATA$}
+-config=MC3R1.D4.9,macros+={hide, ^REFLECT_REMAINDER$}
+-doc_end
 
 #-file_tag+={api:public,"^src/crc\\.h$"}
 #-public_files+=api:public
