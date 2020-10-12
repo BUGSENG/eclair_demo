@@ -2,7 +2,7 @@
 #-enable=MC3.R1.1
 -enable=NC3.2.2.h
 
-#-eval_file=gcc-x86_64-7.5.0.ecl
+-eval_file=gcc-x86_64-7.5.0.ecl
 
 #-config=MC3R1.D4.9,macros+={hide, ^REFLECT_DATA$}
 #-config=MC3R1.D4.9,macros+={hide, ^REFLECT_REMAINDER$}
