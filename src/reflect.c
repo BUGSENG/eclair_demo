@@ -25,6 +25,7 @@
 uint32_t
 reflect (uint32_t data, uint8_t n_bits)
 {
+	uint32_t xdata = data;
     uint32_t  reflection = 0x00000000;
 
 
@@ -36,13 +37,13 @@ reflect (uint32_t data, uint8_t n_bits)
     {
         // If the LSB bit is set, set the reflection of it.
         //
-        if ((data & 0x01U) != 0U)
+        if ((xdata & 0x01U) != 0U)
         {
             /* -E> hide MC3R1.R12.2 1 See NOTE above. */
             reflection |= ((uint32_t) 1 << ((n_bits - 1U) - bit));
         }
 
-        data = (data >> 1);
+        xdata = (xdata >> 1);
     }
 
     return (reflection);
