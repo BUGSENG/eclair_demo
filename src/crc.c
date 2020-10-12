@@ -11,6 +11,7 @@
  */
 
 #include <stdint.h>
+#include <stddef.h>
 
 #include "crc.h"
 #include "reflect.h"
@@ -76,7 +77,7 @@ crc_init (void)
 
         // Perform modulo-2 division, a bit at a time.
         //
-        for (int bit = BITS_PER_BYTE; bit > 0; --bit)
+        for (uint8_t bit = BITS_PER_BYTE; bit > 0; --bit)
         {
             // Try to divide the current data bit.
             //
@@ -105,13 +106,13 @@ crc_init (void)
  * @return The CRC of the array of data.
  */
 crc_t
-crc_slow (uint8_t const * const p_message, int n_bytes)
+crc_slow (uint8_t const * const p_message, size_t n_bytes)
 {
     crc_t    remainder = INITIAL_REMAINDER;
 
     // Perform modulo-2 division, one byte at a time.
     //
-    for (int byte = 0; byte < n_bytes; ++byte)
+    for (size_t byte = 0; byte < n_bytes; ++byte)
     {
         // Bring the next byte into the remainder.
         //
@@ -119,7 +120,7 @@ crc_slow (uint8_t const * const p_message, int n_bytes)
 
         // Perform modulo-2 division, one bit at a time.
         //
-        for (int bit = BITS_PER_BYTE; bit > 0; --bit)
+        for (uint8_t bit = BITS_PER_BYTE; bit > 0; --bit)
         {
             // Try to divide the current data bit.
             //
@@ -147,13 +148,13 @@ crc_slow (uint8_t const * const p_message, int n_bytes)
  * @return The CRC of the array of data.
  */
 crc_t
-crc_fast (uint8_t const * const p_message, int n_bytes)
+crc_fast (uint8_t const * const p_message, size_t n_bytes)
 {
     crc_t remainder = INITIAL_REMAINDER;
 
     // Divide the message by the polynomial, a byte at a time.
     //
-    for (int byte = 0; byte < n_bytes; ++byte)
+    for (size_t byte = 0; byte < n_bytes; ++byte)
     {
         uint8_t data = REFLECT_DATA(p_message[byte]) ^
                            (remainder >> (WIDTH - BITS_PER_BYTE));
