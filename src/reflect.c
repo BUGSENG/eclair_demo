@@ -14,6 +14,8 @@
 
 #include <stdint.h>
 
+#include "reflect.h"
+
 /*!
  * @brief Compute the reflection of a set of data bits around its center.
  * @param[in] data  The data bits to be reflected.
