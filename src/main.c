@@ -40,7 +40,7 @@ main (int argc, char *argv[])
      */
     if (1 == argc)
     {
-        /* -E> hide MC3R1.D4.13 3 We assume the implementation provides a valid stderr.
+        /* -E> hide MC3R1.D4.13 3 We assume the implementation provides a valid stderr. */
         /* -E> hide MC3R1.D4.7 2 If printing to stderr fails there is little we can do besides returning 1. */
         (void) fprintf(stderr, "usage: %s -l [string]...\n", my_name);
         (void) fprintf(stderr, "usage: %s string...\n", my_name);
