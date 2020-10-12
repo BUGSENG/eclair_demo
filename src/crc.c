@@ -81,7 +81,7 @@ crc_init (void)
         {
             // Try to divide the current data bit.
             //
-            if (remainder & TOPBIT)
+            if ((remainder & TOPBIT) != 0U)
             {
                 remainder = (remainder << 1) ^ POLYNOMIAL;
             }
@@ -124,7 +124,7 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
         {
             // Try to divide the current data bit.
             //
-            if (remainder & TOPBIT)
+            if ((remainder & TOPBIT) != 0U)
             {
                 remainder = (remainder << 1) ^ POLYNOMIAL;
             }

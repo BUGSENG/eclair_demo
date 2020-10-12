@@ -36,7 +36,7 @@ reflect (uint32_t data, uint8_t n_bits)
     {
         // If the LSB bit is set, set the reflection of it.
         //
-        if (data & 0x01U)
+        if ((data & 0x01U) != 0U)
         {
             /* -E> hide MC3R1.R12.2 1 See NOTE above. */
             reflection |= ((uint32_t) 1 << ((n_bits - 1U) - bit));
