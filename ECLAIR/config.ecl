@@ -15,7 +15,7 @@
 
 -config=MC3R1.R15.5,reports+={hide,"all_area(context(^main\\(.*$))"}
 
-#-config=MC3R1.R21.6,reports+={hide,"all_area(all_loc(^src/main\\.c$))"}
+-config=MC3R1.R21.6,reports+={hide,"all_area(all_loc(^src/main\\.c$))"}
 
 -default_call_properties+="pointee_read(1..=never)"
 -default_call_properties+="pointee_write(1..=always)"
