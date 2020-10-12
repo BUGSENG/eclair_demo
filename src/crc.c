@@ -19,13 +19,13 @@
 
 // Algorithmic parameters based on CRC elections made in crc.h.
 //
-#define BITS_PER_BYTE      8
+#define BITS_PER_BYTE      8U
 #define WIDTH              (BITS_PER_BYTE * (uint8_t) sizeof(crc_t))
-#define TOPBIT             ((crc_t) 1 << (WIDTH - 1))
+#define TOPBIT             ((crc_t) 1 << (WIDTH - 1U))
 
 // Allocate storage for the byte-wide CRC lookup table.
 //
-#define CRC_TABLE_SIZE     256
+#define CRC_TABLE_SIZE     256U
 static crc_t  g_crc_table[CRC_TABLE_SIZE];
 
 
@@ -77,7 +77,7 @@ crc_init (void)
 
         // Perform modulo-2 division, a bit at a time.
         //
-        for (uint8_t bit = BITS_PER_BYTE; bit > 0; --bit)
+        for (uint8_t bit = BITS_PER_BYTE; bit > 0U; --bit)
         {
             // Try to divide the current data bit.
             //
@@ -120,7 +120,7 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
 
         // Perform modulo-2 division, one bit at a time.
         //
-        for (uint8_t bit = BITS_PER_BYTE; bit > 0; --bit)
+        for (uint8_t bit = BITS_PER_BYTE; bit > 0U; --bit)
         {
             // Try to divide the current data bit.
             //
