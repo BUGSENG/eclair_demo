@@ -116,7 +116,7 @@ crc_slow (uint8_t const * const p_message, size_t n_bytes)
     {
         // Bring the next byte into the remainder.
         //
-        remainder ^= (REFLECT_DATA(p_message[byte]) << (WIDTH - BITS_PER_BYTE));
+        remainder ^= ((crc_t) REFLECT_DATA(p_message[byte]) << (WIDTH - BITS_PER_BYTE));
 
         // Perform modulo-2 division, one bit at a time.
         //
