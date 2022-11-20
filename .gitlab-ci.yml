@@ -1,0 +1,61 @@
+analyze_merge_request:
+  only:
+    - merge_requests
+  variables:
+    SCRIPT_DIR: "./ECLAIR"
+    OUTPUT_DIR: "./ECLAIR_out"
+  script:
+    - |
+      set -eu
+      # Prepare for build
+      ./prepare.sh Debug
+      # Analyze the project
+      ex=0
+      "${SCRIPT_DIR}/analyze.sh" || ex=$?
+      "${SCRIPT_DIR}/action_log.sh" ANALYSIS_LOG \
+                             "ECLAIR analysis log" \
+                             "${OUTPUT_DIR}/ANALYSIS.log" \
+                             "${ex}"
+      "${SCRIPT_DIR}/action_log.sh" REPORT_LOG \
+                             "ECLAIR report log" \
+                             "${OUTPUT_DIR}/REPORT.log" \
+                             "${ex}"
+      [ "${ex}" = 0 ] || exit "${ex}"
+      "${SCRIPT_DIR}/action_pull_request.sh" "${WTOKEN}" "${OUTPUT_DIR}"
+  artifacts:
+    when: always
+    paths:
+      - "${OUTPUT_DIR}"
+    reports:
+      codequality: gl-code-quality-report.json
+
+analyze_push:
+  image: jenkins-runner
+  interruptible: true
+  variables:
+    SCRIPT_DIR: "./ECLAIR"
+    OUTPUT_DIR: "./ECLAIR_out"
+  script:
+    - |
+      set -eu
+      # Prepare for build
+      ./prepare.sh Debug
+      # Analyze the project
+      ex=0
+      "${SCRIPT_DIR}/analyze.sh" || ex=$?
+      "${SCRIPT_DIR}/action_log.sh" ANALYSIS_LOG \
+                             "ECLAIR analysis log" \
+                             "${OUTPUT_DIR}"/ANALYSIS.log \
+                             "${ex}"
+      "${SCRIPT_DIR}/action_log.sh" REPORT_LOG \
+                             "ECLAIR report log" \
+                             "${OUTPUT_DIR}"/REPORT.log \
+                             "${ex}"
+      [ "${ex}" = 0 ] || exit "${ex}"
+      "${SCRIPT_DIR}/action_push.sh" "${WTOKEN}" "${OUTPUT_DIR}"
+  artifacts:
+    when: always
+    paths:
+      - "${OUTPUT_DIR}"
+    reports:
+      codequality: gl-code-quality-report.json
