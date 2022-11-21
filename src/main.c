@@ -81,19 +81,25 @@ main (int argc, char *argv[])
                                         // Casting is the same size, 1 byte
         r = sprintf(cslow, HEX_FORMAT,
         		crc_slow((uint8_t const *) argv[arg_cnt], parm_len));
-        if (r < 0) return(1);
+        if (r < 0) {
+            return(1);
+        }
 
         // Fast CRC Computation
                                         // Casting is the same size, 1 byte
         r = sprintf(cfast, HEX_FORMAT,
         		crc_fast((uint8_t const *) argv[arg_cnt], parm_len));
-        if (r < 0) return(1);
+        if (r < 0) {
+            return(1);
+        }
 
         /*
          * Print the results.
          */
         r = printf(PRINTF_FORMAT, CRC_NAME, cslow, cfast, argv[arg_cnt]);
-        if (r < 0) return(1);
+        if (r < 0) {
+            return(1);
+        }
     }
 
 return (0);
