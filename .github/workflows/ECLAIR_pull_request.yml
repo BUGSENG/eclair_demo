@@ -12,7 +12,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 2
         submodules: 'true'
     - name: Build and analyze with ECLAIR
       run: |
