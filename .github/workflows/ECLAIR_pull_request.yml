@@ -34,10 +34,6 @@ jobs:
       uses: BUGSENG/codeql-action/upload-sarif@v2
       with:
         sarif_file: reports.sarif
-    - name: Debug
-      env:
-        GITHUB_CONTEXT: ${{toJson(github)}}
-      run: echo "$GITHUB_CONTEXT"
     - name: Publish ECLAIR results
       env:
         PR_HEAD_BRANCH: ${{github.event.pull_request.head.ref}}
