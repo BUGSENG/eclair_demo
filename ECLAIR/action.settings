@@ -22,8 +22,8 @@ gitlab)
         event="pull_request"
         pullRequestId=${CI_MERGE_REQUEST_IID}
         pullRequestHeadBranch=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
-        pullRequestHeadLabel=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
-        pullRequestBaseLabel=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+        pullRequestHeadLabel=${CI_MERGE_REQUEST_SOURCE_PROJECT_PATH}:${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
+        pullRequestBaseLabel=${CI_MERGE_REQUEST_PROJECT_PATH}:${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
         pullRequestUser=${GITLAB_USER_LOGIN}
         ;;
     push | pipeline)
@@ -69,7 +69,9 @@ esac
 
 case "${event}" in
 pull_request)
-    subDir="${pullRequestHeadLabel}_${pullRequestBaseLabel}"
+    subDir=${pullRequestHeadLabel}_${pullRequestBaseLabel}
+    subDir=${subDir////_}
+    subDir=${subDir//:/_}
     jobHeadline="Repository ${repository}: ${pullRequestUser} wants to merge ${pullRequestHeadLabel} into ${pullRequestBaseLabel}"
     ;;
 push)
