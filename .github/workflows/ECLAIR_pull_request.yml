@@ -1,6 +1,6 @@
 name: "ECLAIR pull request"
 on:
-  pull_request_target:
+  pull_request:
     types: ['opened', 'synchronize']
 env:
   GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{github.event.pull_request.number}}
