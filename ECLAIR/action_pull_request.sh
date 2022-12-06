@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -eu
+set -x
 
 usage() {
     echo "Usage: $0 WTOKEN ANALYSIS_OUTPUT_DIR COMMIT_ID BASE_COMMIT_ID" >&2
