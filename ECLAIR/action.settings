@@ -41,7 +41,7 @@ github)
     repository=${GITHUB_REPOSITORY}
     jobId=${GITHUB_RUN_NUMBER}
 
-    case "${GITHUB_EVENT_NAME" in
+    case "${GITHUB_EVENT_NAME}" in
     pull_request*)
         event="pull_request"
         pullRequestId=${GITHUB_EVENT_PULL_REQUEST_NUMBER}
