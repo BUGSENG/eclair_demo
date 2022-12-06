@@ -5,16 +5,17 @@ set -x
 env
 
 usage() {
-    echo "Usage: $0 WTOKEN ANALYSIS_OUTPUT_DIR COMMIT_ID BASE_COMMIT_ID" >&2
+    echo "Usage: $0 WTOKEN ANALYSIS_OUTPUT_DIR COMMIT_ID" >&2
     exit 2
 }
 
-[ $# -eq 4 ] || usage
+[ $# -eq 3 ] || usage
 
 wtoken=$1
 analysisOutputDir=$2
-#commitId=$3
-baseCommitId=$4
+commitId=$3
+
+baseCommitId=$(git rev-parse HEAD^2)
 
 # Load settings and helpers
 . "$(dirname "$0")/action.helpers"
