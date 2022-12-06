@@ -40,6 +40,7 @@ jobs:
       run: echo "$GITHUB_CONTEXT"
     - name: Publish ECLAIR results
       env:
+        PR_HEAD_BRANCH: ${{github.event.pull_request.head.ref}}
         PR_HEAD_LABEL: ${{github.event.pull_request.head.label}}
         PR_BASE_LABEL: ${{github.event.pull_request.base.label}}
         PR_USER: ${{github.event.pull_request.user.login}}

@@ -15,7 +15,13 @@ wtoken=$1
 analysisOutputDir=$2
 commitId=$3
 
-baseCommitId=$(git rev-parse HEAD^2)
+while :
+do
+    git fetch -q --deepen=10
+    if baseCommitId=$(git merge-base --fork-point origin/${pullRequestHeadBranch}) then
+       break
+    fi
+done
 
 # Load settings and helpers
 . "$(dirname "$0")/action.helpers"
