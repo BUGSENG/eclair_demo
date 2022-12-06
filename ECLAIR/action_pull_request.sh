@@ -13,12 +13,12 @@ usage() {
 
 wtoken=$1
 analysisOutputDir=$2
-commitId=$3
+# commitId=$3
 
 while :
 do
     git fetch -q --deepen=10
-    if baseCommitId=$(git merge-base --fork-point origin/${pullRequestHeadBranch}) then
+    if baseCommitId=$(git merge-base --fork-point "origin/${pullRequestHeadBranch}") ; then
        break
     fi
 done

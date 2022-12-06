@@ -23,7 +23,7 @@ gitlab)
         pullRequestId=${CI_MERGE_REQUEST_IID}
         pullRequestHeadBranch=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
         pullRequestHeadLabel=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
-        pullRequestBaseLavel=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+        pullRequestBaseLabel=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
         pullRequestUser=${GITLAB_USER_LOGIN}
         ;;
     push | pipeline)
