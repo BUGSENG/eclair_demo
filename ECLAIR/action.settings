@@ -41,17 +41,15 @@ github)
     repository=${GITHUB_REPOSITORY}
     jobId=${GITHUB_RUN_NUMBER}
 
-    case "${GITHUB_REF}" in
-    refs/pull/*/merge)
+    case "${GITHUB_EVENT_NAME" in
+    pull_request*)
         event="pull_request"
-        # Extract PR number from "refs/pull/<prnum>/merge"
-        pullRequestId=${GITHUB_REF#refs/pull/}
-        pullRequestId=${pullRequestId%/merge}
+        pullRequestId=${GITHUB_EVENT_PULL_REQUEST_NUMBER}
         pullRequestHeadRef=${PR_HEAD_REF}
         pullRequestBaseRef=${PR_BASE_REF}
         pullRequestUser=${PR_USER}
         ;;
-    refs/heads/*)
+    push)
         event="push"
         # Extract the branch name from "refs/heads/<branch>"
         branch=${GITHUB_REF#refs/heads/}

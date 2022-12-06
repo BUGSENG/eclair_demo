@@ -3,7 +3,8 @@ on:
   pull_request_target:
     types: ['opened', 'synchronize']
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{github.event.pull_request.number}}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
   Analyze:
     runs-on: eclairit
@@ -35,9 +36,9 @@ jobs:
         sarif_file: reports.sarif
     - name: Publish ECLAIR results
       env:
-        PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
-        PR_BASE_COMMIT_ID: ${{ github.event.pull_request.base.sha }}
-        PR_USER: ${{ github.event.pull_request.user.login }}
-        WTOKEN: ${{ secrets.WTOKEN }}
+        PR_HEAD_REF: ${{github.event.pull_request.head.ref}}
+        PR_BASE_REF: ${{github.event.pull_request.base.ref}}
+        PR_BASE_COMMIT_ID: ${{github.event.pull_request.base.sha}}
+        PR_USER: ${{github.event.pull_request.user.login}}
+        WTOKEN: ${{secrets.WTOKEN}}
       run: ECLAIR/action_pull_request.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}" "${PR_BASE_COMMIT_ID}"
