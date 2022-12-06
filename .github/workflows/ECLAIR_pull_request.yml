@@ -36,8 +36,8 @@ jobs:
         sarif_file: reports.sarif
     - name: Publish ECLAIR results
       env:
-        PR_HEAD_REF: ${{github.event.pull_request.head.ref}}
-        PR_BASE_REF: ${{github.event.pull_request.base.ref}}
+        PR_HEAD_REF: ${{github.head_ref}}
+        PR_BASE_REF: ${{github.base_ref}}
         PR_BASE_COMMIT_ID: ${{github.event.pull_request.base.sha}}
         PR_USER: ${{github.event.pull_request.user.login}}
         WTOKEN: ${{secrets.WTOKEN}}
