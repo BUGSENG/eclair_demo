@@ -15,6 +15,10 @@ wtoken=$1
 analysisOutputDir=$2
 # commitId=$3
 
+# Load settings and helpers
+. "$(dirname "$0")/action.helpers"
+. "$(dirname "$0")/action.settings"
+
 while :
 do
     git fetch -q --deepen=10
@@ -22,10 +26,6 @@ do
        break
     fi
 done
-
-# Load settings and helpers
-. "$(dirname "$0")/action.helpers"
-. "$(dirname "$0")/action.settings"
 
 curl -sS "${eclairReportUrlPrefix}/ext/update_pull_request" \
     -F "wtoken=${wtoken}" \
