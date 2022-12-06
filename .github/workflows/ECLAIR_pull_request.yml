@@ -1,10 +1,9 @@
 name: "ECLAIR pull request"
 on:
-  pull_request:
+  pull_request_target:
     types: ['opened', 'synchronize']
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  WTOKEN: ${{ secrets.WTOKEN }}
 jobs:
   Analyze:
     runs-on: eclairit
@@ -40,4 +39,5 @@ jobs:
         PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
         PR_BASE_COMMIT_ID: ${{ github.event.pull_request.base.sha }}
         PR_USER: ${{ github.event.pull_request.user.login }}
+        WTOKEN: ${{ secrets.WTOKEN }}
       run: ECLAIR/action_pull_request.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}" "${PR_BASE_COMMIT_ID}"
