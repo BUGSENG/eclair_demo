@@ -21,8 +21,8 @@ gitlab)
     merge_request_event)
         event="pull_request"
         pullRequestId=${CI_MERGE_REQUEST_IID}
-        pullRequestHeadRef=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
-        pullRequestBaseRef=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+        pullRequestHeadLabel=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}
+        pullRequestBaseLavel=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
         pullRequestUser=${GITLAB_USER_LOGIN}
         ;;
     push | pipeline)
@@ -41,17 +41,15 @@ github)
     repository=${GITHUB_REPOSITORY}
     jobId=${GITHUB_RUN_NUMBER}
 
-    case "${GITHUB_REF}" in
-    refs/pull/*/merge)
+    case "${GITHUB_EVENT_NAME}" in
+    pull_request*)
         event="pull_request"
-        # Extract PR number from "refs/pull/<prnum>/merge"
-        pullRequestId=${GITHUB_REF#refs/pull/}
-        pullRequestId=${pullRequestId%/merge}
-        pullRequestHeadRef=${PR_HEAD_REF}
-        pullRequestBaseRef=${PR_BASE_REF}
+        pullRequestId=${GITHUB_EVENT_PULL_REQUEST_NUMBER}
+        pullRequestHeadLabel=${PR_HEAD_LABEL}
+        pullRequestBaseLabel=${PR_BASE_LABEL}
         pullRequestUser=${PR_USER}
         ;;
-    refs/heads/*)
+    push)
         event="push"
         # Extract the branch name from "refs/heads/<branch>"
         branch=${GITHUB_REF#refs/heads/}
@@ -69,8 +67,8 @@ esac
 
 case "${event}" in
 pull_request)
-    subDir="${pullRequestHeadRef}_${pullRequestBaseRef}"
-    jobHeadline="Repository ${repository}: ${pullRequestUser} wants to merge ${pullRequestHeadRef} into ${pullRequestBaseRef}"
+    subDir="${pullRequestHeadLabel}_${pullRequestBaseLabel}"
+    jobHeadline="Repository ${repository}: ${pullRequestUser} wants to merge ${pullRequestHeadLabel} into ${pullRequestBaseLabel}"
     ;;
 push)
     subDir="${branch}"

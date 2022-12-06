@@ -1,7 +1,7 @@
 name: "ECLAIR push"
 on: [workflow_dispatch, push]
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
   Analyze:
     runs-on: eclairit
@@ -33,5 +33,5 @@ jobs:
         sarif_file: reports.sarif
     - name: Publish ECLAIR results
       env:
-        WTOKEN: ${{ secrets.WTOKEN }}
+        WTOKEN: ${{secrets.WTOKEN}}
       run: ECLAIR/action_push.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}"
