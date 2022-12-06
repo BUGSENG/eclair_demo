@@ -31,7 +31,9 @@ jobs:
         name: artifacts
         path: ECLAIR_out
     - name: Upload ECLAIR SARIF
-      run: ./ECLAIR/action_upload_sarif.sh reports.sarif
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports.sarif
     - name: Publish ECLAIR results
       env:
         PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
