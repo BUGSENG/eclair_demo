@@ -6,7 +6,3 @@
 [Browse all ECLAIR analyses](https://eclairit.com:3787/fs/home/eclair-github/public/BUGSENG/eclair_demo.ecdf/)
 
 Small demonstration of the integration of ECLAIR with GitHub
-
-little change. change
-change ddd ddd
-ddd
