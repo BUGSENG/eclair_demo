@@ -1,6 +1,6 @@
 name: "ECLAIR pull request"
 on:
-  pull_request:
+  pull_request_target:
     types: ['opened', 'synchronize']
 env:
   GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{github.event.pull_request.number}}
@@ -12,6 +12,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
+        ref: "refs/pull/${{github.event.number}}/merge"
         submodules: 'true'
     - name: Build and analyze with ECLAIR
       run: |
@@ -41,4 +42,4 @@ jobs:
         PR_BASE_LABEL: ${{github.event.pull_request.base.label}}
         PR_USER: ${{github.event.pull_request.user.login}}
         WTOKEN: ${{secrets.WTOKEN}}
-      run: ECLAIR/action_pull_request.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}"
+      run: ECLAIR/action_pull_request.sh "${WTOKEN}" ECLAIR_out

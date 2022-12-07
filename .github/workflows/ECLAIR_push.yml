@@ -34,4 +34,4 @@ jobs:
     - name: Publish ECLAIR results
       env:
         WTOKEN: ${{secrets.WTOKEN}}
-      run: ECLAIR/action_push.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}"
+      run: ECLAIR/action_push.sh "${WTOKEN}" ECLAIR_out

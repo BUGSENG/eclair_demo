@@ -11,7 +11,6 @@ usage() {
 
 wtoken=$1
 analysisOutputDir=$2
-# commitId=$3
 
 # Load settings and helpers
 . "$(dirname "$0")/action.helpers"
