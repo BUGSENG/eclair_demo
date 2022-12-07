@@ -1,8 +1,7 @@
 name: "ECLAIR push"
 on: [workflow_dispatch, push]
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  WTOKEN: ${{ secrets.WTOKEN }}
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 jobs:
   Analyze:
     runs-on: eclairit
@@ -29,6 +28,10 @@ jobs:
         name: artifacts
         path: ECLAIR_out
     - name: Upload ECLAIR SARIF
-      run: ./ECLAIR/action_upload_sarif.sh reports.sarif
+      uses: BUGSENG/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports.sarif
     - name: Publish ECLAIR results
-      run: ECLAIR/action_push.sh "${WTOKEN}" ECLAIR_out "${GITHUB_SHA}"
+      env:
+        WTOKEN: ${{secrets.WTOKEN}}
+      run: ECLAIR/action_push.sh "${WTOKEN}" ECLAIR_out
