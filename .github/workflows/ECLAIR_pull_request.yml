@@ -37,9 +37,9 @@ jobs:
         sarif_file: reports.sarif
     - name: Publish ECLAIR results
       env:
-        PR_HEAD_BRANCH: ${{github.event.pull_request.head.ref}}
-        PR_HEAD_LABEL: ${{github.event.pull_request.head.label}}
-        PR_BASE_LABEL: ${{github.event.pull_request.base.label}}
+        PR_HEAD_REF: ${{github.event.pull_request.head.ref}}
+        PR_HEAD_REPO: ${{github.event.pull_request.head.repo.name}}
+        PR_BASE_REF: ${{github.event.pull_request.base.ref}}
         PR_USER: ${{github.event.pull_request.user.login}}
         WTOKEN: ${{secrets.WTOKEN}}
       run: ECLAIR/action_pull_request.sh "${WTOKEN}" ECLAIR_out
