@@ -19,7 +19,7 @@ analysisOutputDir=$2
 while :
 do
     git fetch -q --deepen=10
-    if baseCommitId=$(git merge-base --fork-point "origin/${pullRequestHeadBranch}") ; then
+    if baseCommitId=$(git merge-base --fork-point "origin/${pullRequestHeadRef}") ; then
        break
     fi
 done
