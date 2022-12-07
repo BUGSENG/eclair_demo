@@ -7,7 +7,7 @@ usage() {
     exit 2
 }
 
-[ $# -eq 3 ] || usage
+[ $# -eq 2 ] || usage
 
 wtoken=$1
 analysisOutputDir=$2
