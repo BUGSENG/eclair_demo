@@ -21,7 +21,7 @@ analyze_merge_request:
                              "${OUTPUT_DIR}/REPORT.log" \
                              "${ex}"
       [ "${ex}" = 0 ] || exit "${ex}"
-      "${SCRIPT_DIR}/action_pull_request.sh" "${WTOKEN}" "${OUTPUT_DIR}" "${CI_COMMIT_SHA}"
+      "${SCRIPT_DIR}/action_pull_request.sh" "${WTOKEN}" "${OUTPUT_DIR}"
   artifacts:
     when: always
     paths:
@@ -52,7 +52,7 @@ analyze_push:
                              "${OUTPUT_DIR}"/REPORT.log \
                              "${ex}"
       [ "${ex}" = 0 ] || exit "${ex}"
-      "${SCRIPT_DIR}/action_push.sh" "${WTOKEN}" "${OUTPUT_DIR}" "${CI_COMMIT_SHA}"
+      "${SCRIPT_DIR}/action_push.sh" "${WTOKEN}" "${OUTPUT_DIR}"
   artifacts:
     when: always
     paths:

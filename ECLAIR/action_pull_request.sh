@@ -1,25 +1,28 @@
 #!/bin/sh
 
 set -eu
-set -x
-env
 
 usage() {
     echo "Usage: $0 WTOKEN ANALYSIS_OUTPUT_DIR COMMIT_ID" >&2
     exit 2
 }
 
-[ $# -eq 3 ] || usage
+[ $# -eq 2 ] || usage
 
 wtoken=$1
 analysisOutputDir=$2
-commitId=$3
-
-baseCommitId=$(git rev-parse HEAD^2)
 
 # Load settings and helpers
 . "$(dirname "$0")/action.helpers"
 . "$(dirname "$0")/action.settings"
+
+while :
+do
+    git fetch -q --deepen=10
+    if baseCommitId=$(git merge-base --fork-point "origin/${pullRequestHeadRef}") ; then
+       break
+    fi
+done
 
 curl -sS "${eclairReportUrlPrefix}/ext/update_pull_request" \
     -F "wtoken=${wtoken}" \
