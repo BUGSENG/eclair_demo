@@ -6,6 +6,16 @@ set -o pipefail
 HERE=$(cd "$(dirname "$0")" ; echo "${PWD}")
 TOP=${HERE%/*}
 
+usage() {
+    echo "Usage: $0 ANALYSIS_MODE" >&2
+    exit 2
+}
+
+[ $# -eq 1 ] || usage
+
+analysis_ecl=${HERE}/analysis_$1.ecl
+report_ecl=${HERE}/report_$1.ecl
+
 # shellcheck source=./eclair_settings.sh
 . "${HERE}/eclair_settings.sh"
 
@@ -26,6 +36,6 @@ rm -rf "${ECLAIR_OUTPUT_DIR}" "${ECLAIR_DATA_DIR}"
 mkdir -p "${ECLAIR_OUTPUT_DIR}" "${ECLAIR_DATA_DIR}"
 
 "${TOP}/clean.sh"
-"${ECLAIR_PATH}eclair_env" "-eval_file='${HERE}/analysis.ecl'" -- "${TOP}/build.sh" 2>&1 | tee "${ECLAIR_BUILD_LOG}"
+"${ECLAIR_PATH}eclair_env" "-eval_file='${analysis_ecl}'" -- "${TOP}/build.sh" 2>&1 | tee "${ECLAIR_BUILD_LOG}"
 
-"${ECLAIR_PATH}eclair_report" "-eval_file='${HERE}/report.ecl'" > "${ECLAIR_REPORT_LOG}" 2>&1
+"${ECLAIR_PATH}eclair_report" "-eval_file='${report_ecl}'" > "${ECLAIR_REPORT_LOG}" 2>&1
