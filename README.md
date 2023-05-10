@@ -1,4 +1,6 @@
-[![ECLAIR](https://eclairit.com:3787/rsrc/eclair.png)](https://www.bugseng.com/eclair)
+<a href="https://www.bugseng.com/eclair">
+  <img src="https://eclairit.com:3787/rsrc/eclair.svg" width="100" />
+</a>
 
 [![ECLAIR main](https://eclairit.com:3787/fs/home/eclair-github/public/BUGSENG/eclair_demo.ecdf/ECLAIR_normal/main/latest/badge.svg)](https://eclairit.com:3787/fs/home/eclair-github/public/BUGSENG/eclair_demo.ecdf/ECLAIR_normal/main/latest/index.html)
 [![ECLAIR misra-fixes](https://eclairit.com:3787/fs/home/eclair-github/public/BUGSENG/eclair_demo.ecdf/ECLAIR_normal/misra-fixes/latest/badge.svg)](https://eclairit.com:3787/fs/home/eclair-github/public/BUGSENG/eclair_demo.ecdf/ECLAIR_normal/misra-fixes/latest/index.html)
