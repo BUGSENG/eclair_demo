@@ -1,4 +1,4 @@
-name: "ECLAIR pull request"
+name: "ECLAIR"
 on:
   pull_request_target:
     types: ['opened', 'synchronize']
@@ -37,7 +37,7 @@ jobs:
         uses: BUGSENG/codeql-action/upload-sarif@v2
         with:
           sarif_file: ECLAIR_out/reports.sarif
-          category: "eclair-${ANALYSIS_KIND}"
+          category: "eclair-normal"
       - name: Publish ECLAIR results
         env:
           PR_HEAD_REF: ${{github.event.pull_request.head.ref}}
