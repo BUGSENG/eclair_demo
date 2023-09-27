@@ -10,4 +10,4 @@
 
 [Browse all ECLAIR analyses](https://eclairit.com:3787/fs/var/local/eclair/github/BUGSENG/eclair_demo.ecdf/)
 
-Small demonstration of the integration of ECLAIR with GitHub
+Small demonstration of the integration of ECLAIR with GitHub!
