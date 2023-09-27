@@ -1,4 +1,4 @@
-name: "ECLAIR final"
+name: "ECLAIR"
 on: [workflow_dispatch]
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -33,7 +33,7 @@ jobs:
         uses: BUGSENG/codeql-action/upload-sarif@v2
         with:
           sarif_file: ECLAIR_out/reports.sarif
-          category: "eclair-${ANALYSIS_KIND}"
+          category: "eclair-final"
       - name: Publish ECLAIR results
         env:
           WTOKEN: ${{secrets.WTOKEN}}
