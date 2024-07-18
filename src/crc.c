@@ -21,7 +21,7 @@
 //
 #define BITS_PER_BYTE      8U
 #define WIDTH              (BITS_PER_BYTE * (uint8_t) sizeof(crc_t))
-#define TOPBIT             ((crc_t) 1 << (WIDTH - 1U))
+#define TOPBIT             (1 << (WIDTH - 1U))
 
 // Allocate storage for the byte-wide CRC lookup table.
 //
@@ -81,7 +81,7 @@ crc_init (void)
         {
             // Try to divide the current data bit.
             //
-            if ((remainder & TOPBIT) != 0U)
+            if ((remainder & TOPBIT))
             {
                 remainder = (remainder << 1) ^ POLYNOMIAL;
             }
