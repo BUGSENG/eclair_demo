@@ -12,9 +12,8 @@ jobs:
     runs-on: eclairit
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: "refs/pull/${{github.event.pull_request.number}}/merge"
           submodules: 'true'
       - name: Build and analyze with ECLAIR
         run: |
