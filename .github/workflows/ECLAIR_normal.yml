@@ -9,7 +9,7 @@ jobs:
     runs-on: eclairit
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'true'
       - name: Build and analyze with ECLAIR
