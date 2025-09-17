@@ -73,7 +73,7 @@ crc_init (void)
     {
         // Start with the dividend followed by zeros.
         //
-        crc_t residue = dividend << (WIDTH - BITS_PER_BYTE);
+        crc_t residue = dividend << (WIDTH1 - BITS_PER_BYTE);
 
         // Perform modulo-2 division, a bit at a time.
         //
